@@ -1,7 +1,6 @@
 package com.jpacourse.persistance.entity;
 
 import com.jpacourse.persistance.enums.TreatmentType;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +16,11 @@ public class MedicalTreatmentEntity {
 
 	@Enumerated(EnumType.STRING)
 	private TreatmentType type;
+
+	@ManyToOne
+	@JoinColumn(name = "visit_id")
+	private VisitEntity visit;
+
 
 	public Long getId() {
 		return id;
@@ -42,4 +46,11 @@ public class MedicalTreatmentEntity {
 		this.type = type;
 	}
 
+	public VisitEntity getVisit() {
+		return visit;
+	}
+
+	public void setVisit(VisitEntity visit) {
+		this.visit = visit;
+	}
 }
