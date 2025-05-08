@@ -1,11 +1,13 @@
-package com.jpacourse.persistance.entity;
+package com.jpacourse.persistence.entity;
 
-import com.jpacourse.persistance.enums.Specialization;
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "DOCTOR")
-public class DoctorEntity {
+@Table(name = "PATIENT")
+public class PatientEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,15 +25,20 @@ public class DoctorEntity {
 	private String email;
 
 	@Column(nullable = false)
-	private String doctorNumber;
+	private String patientNumber;
 
 	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Specialization specialization;
+	private LocalDate dateOfBirth;
+
+	@Column(nullable = false)
+	private boolean active;
 
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private AddressEntity address;
+
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<VisitEntity> visits = new ArrayList<>();
 
 
 	public Long getId() {
@@ -74,20 +81,28 @@ public class DoctorEntity {
 		this.email = email;
 	}
 
-	public String getDoctorNumber() {
-		return doctorNumber;
+	public String getPatientNumber() {
+		return patientNumber;
 	}
 
-	public void setDoctorNumber(String doctorNumber) {
-		this.doctorNumber = doctorNumber;
+	public void setPatientNumber(String patientNumber) {
+		this.patientNumber = patientNumber;
 	}
 
-	public Specialization getSpecialization() {
-		return specialization;
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setSpecialization(Specialization specialization) {
-		this.specialization = specialization;
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	public AddressEntity getAddress() {
@@ -96,5 +111,13 @@ public class DoctorEntity {
 
 	public void setAddress(AddressEntity address) {
 		this.address = address;
+	}
+
+	public List<VisitEntity> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(List<VisitEntity> visits) {
+		this.visits = visits;
 	}
 }

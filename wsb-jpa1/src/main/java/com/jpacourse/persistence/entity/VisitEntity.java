@@ -1,4 +1,4 @@
-package com.jpacourse.persistance.entity;
+package com.jpacourse.persistence.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

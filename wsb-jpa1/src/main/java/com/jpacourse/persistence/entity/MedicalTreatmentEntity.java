@@ -1,6 +1,6 @@
-package com.jpacourse.persistance.entity;
+package com.jpacourse.persistence.entity;
 
-import com.jpacourse.persistance.enums.TreatmentType;
+import com.jpacourse.persistence.enums.TreatmentType;
 import jakarta.persistence.*;
 
 @Entity

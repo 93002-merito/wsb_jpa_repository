@@ -1,11 +1,11 @@
-package com.jpacourse.persistance.entity;
+package com.jpacourse.persistence.entity;
 
-import java.time.LocalDate;
+import com.jpacourse.persistence.enums.Specialization;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "PATIENT")
-public class PatientEntity {
+@Table(name = "DOCTOR")
+public class DoctorEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,16 +23,16 @@ public class PatientEntity {
 	private String email;
 
 	@Column(nullable = false)
-	private String patientNumber;
+	private String doctorNumber;
 
 	@Column(nullable = false)
-	private LocalDate dateOfBirth;
+	@Enumerated(EnumType.STRING)
+	private Specialization specialization;
 
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private AddressEntity address;
 
-	// --- Gettery i settery ---
 
 	public Long getId() {
 		return id;
@@ -74,20 +74,20 @@ public class PatientEntity {
 		this.email = email;
 	}
 
-	public String getPatientNumber() {
-		return patientNumber;
+	public String getDoctorNumber() {
+		return doctorNumber;
 	}
 
-	public void setPatientNumber(String patientNumber) {
-		this.patientNumber = patientNumber;
+	public void setDoctorNumber(String doctorNumber) {
+		this.doctorNumber = doctorNumber;
 	}
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
+	public Specialization getSpecialization() {
+		return specialization;
 	}
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setSpecialization(Specialization specialization) {
+		this.specialization = specialization;
 	}
 
 	public AddressEntity getAddress() {

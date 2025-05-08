@@ -1,6 +1,6 @@
-package com.jpacourse.persistance.dao;
+package com.jpacourse.persistence.dao;
 
-import com.jpacourse.persistance.entity.AddressEntity;
+import com.jpacourse.persistence.entity.AddressEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

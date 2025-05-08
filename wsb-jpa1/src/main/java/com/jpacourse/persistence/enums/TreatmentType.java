@@ -1,4 +1,4 @@
-package com.jpacourse.persistance.enums;
+package com.jpacourse.persistence.enums;
 
 public enum TreatmentType {
 

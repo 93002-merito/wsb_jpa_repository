@@ -1,4 +1,4 @@
-package com.jpacourse.persistance.dao;
+package com.jpacourse.persistence.dao;
 
 import java.io.Serializable;
 import java.util.List;

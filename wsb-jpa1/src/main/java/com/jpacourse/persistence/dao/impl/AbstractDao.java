@@ -1,11 +1,11 @@
-package com.jpacourse.persistance.dao.impl;
+package com.jpacourse.persistence.dao.impl;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 
-import com.jpacourse.persistance.dao.Dao;
+import com.jpacourse.persistence.dao.Dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
