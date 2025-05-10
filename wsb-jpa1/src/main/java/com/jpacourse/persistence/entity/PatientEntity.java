@@ -33,13 +33,15 @@ public class PatientEntity {
 	@Column(nullable = false)
 	private boolean active;
 
+	@Version
+	private int version;
+
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private AddressEntity address;
 
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<VisitEntity> visits = new ArrayList<>();
-
 
 	public Long getId() {
 		return id;
@@ -103,6 +105,14 @@ public class PatientEntity {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public AddressEntity getAddress() {

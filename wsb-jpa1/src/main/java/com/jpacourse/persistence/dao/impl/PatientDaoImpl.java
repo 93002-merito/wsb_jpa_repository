@@ -1,9 +1,9 @@
 package com.jpacourse.persistence.dao.impl;
 
+import com.jpacourse.persistence.dao.PatientDao;
 import com.jpacourse.persistence.entity.DoctorEntity;
 import com.jpacourse.persistence.entity.PatientEntity;
 import com.jpacourse.persistence.entity.VisitEntity;
-import com.jpacourse.persistence.dao.PatientDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -51,11 +51,44 @@ public class PatientDaoImpl implements PatientDao {
             visit.setDoctor(doctor);
             visit.setPatient(patient);
 
-            // Dodaj wizytę do pacjenta
             patient.getVisits().add(visit);
-
-            // Kaskadowo zapisz pacjenta z nową wizytą
             entityManager.merge(patient);
         }
+    }
+
+    @Override
+    public List<PatientEntity> findByLastName(String lastName) {
+        return entityManager.createQuery(
+                        "SELECT p FROM PatientEntity p WHERE p.lastName = :lastName",
+                        PatientEntity.class)
+                .setParameter("lastName", lastName)
+                .getResultList();
+    }
+
+    @Override
+    public List<VisitEntity> findVisitsByPatientId(Long patientId) {
+        return entityManager.createQuery(
+                        "SELECT v FROM VisitEntity v WHERE v.patient.id = :patientId",
+                        VisitEntity.class)
+                .setParameter("patientId", patientId)
+                .getResultList();
+    }
+
+    @Override
+    public List<PatientEntity> findPatientsWithMoreThanXVisits(long minVisits) {
+        return entityManager.createQuery(
+                        "SELECT p FROM PatientEntity p WHERE SIZE(p.visits) > :minVisits",
+                        PatientEntity.class)
+                .setParameter("minVisits", minVisits)
+                .getResultList();
+    }
+
+    @Override
+    public List<PatientEntity> findByActiveBefore(boolean active) {
+        return entityManager.createQuery(
+                        "SELECT p FROM PatientEntity p WHERE p.active = :active",
+                        PatientEntity.class)
+                .setParameter("active", active)
+                .getResultList();
     }
 }
